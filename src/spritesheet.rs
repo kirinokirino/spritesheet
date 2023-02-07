@@ -1,5 +1,41 @@
 use speedy2d::{color::Color, dimen::Vec2, image::ImageHandle, shape::Rectangle, Graphics2D};
 
+//sprite.draw(destination, graphics)
+
+pub struct Spritesheet {
+    image_handle: ImageHandle,
+    pub width: u32,
+    pub height: u32,
+}
+
+impl Spritesheet {
+    pub const fn new(image_handle: ImageHandle, width: u32, height: u32) -> Self {
+        Self {
+            image_handle,
+            width,
+            height,
+        }
+    }
+
+    pub fn draw_sprite(
+        &self,
+        dest: &Rectangle,
+        sprite_x: u32,
+        sprite_y: u32,
+        graphics: &mut Graphics2D,
+    ) {
+        draw_sprite(
+            dest,
+            &self.image_handle,
+            sprite_x,
+            sprite_y,
+            self.width,
+            self.height,
+            graphics,
+        );
+    }
+}
+
 pub fn draw_sprite(
     destination: &Rectangle,
     spritesheet: &ImageHandle,
