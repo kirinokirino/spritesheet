@@ -14,6 +14,7 @@ use game::Game;
 pub struct App {
     viewport_size: UVec2,
 
+    current_frame: u64,
     mouse: Mouse,
     keyboard: Keyboard,
     is_fullscreen: bool,
@@ -26,6 +27,8 @@ impl App {
     pub fn new(viewport_size: UVec2, config: crate::config::Config) -> Self {
         Self {
             viewport_size,
+
+            current_frame: 0,
             mouse: Mouse::new(),
             keyboard: Keyboard::new(),
             is_fullscreen: false,
@@ -36,11 +39,20 @@ impl App {
     }
 
     pub fn game_loop(&mut self, _helper: &mut WindowHelper<()>, graphics: &mut Graphics2D) {
+        if self.current_frame == 0 {
+            self.setup(graphics);
+        }
+
         self.input();
 
         self.update();
 
         self.draw(graphics);
+        self.current_frame += 1;
+    }
+
+    pub fn setup(&mut self, graphics: &mut Graphics2D) {
+        self.game.setup(graphics);
     }
 
     pub fn input(&mut self) {
