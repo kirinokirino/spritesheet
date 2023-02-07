@@ -1,5 +1,5 @@
-use speedy2d::color::Color;
-use speedy2d::dimen::{IVec2, Vec2};
+
+use speedy2d::dimen::{Vec2};
 use speedy2d::image::{ImageFileFormat, ImageHandle, ImageSmoothingMode};
 use speedy2d::shape::Rectangle;
 use speedy2d::{dimen::UVec2, Graphics2D};
@@ -36,7 +36,7 @@ impl Game {
         self.images.push(spritesheet);
     }
 
-    pub fn input(&mut self, viewport_size: UVec2, mouse: &Mouse, keyboard: &Keyboard) {
+    pub fn input(&mut self, viewport_size: UVec2, _mouse: &Mouse, _keyboard: &Keyboard) {
         self.viewport_size = viewport_size;
     }
 
