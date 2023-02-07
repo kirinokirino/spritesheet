@@ -23,7 +23,7 @@ pub struct App {
 }
 
 impl App {
-    pub fn new(viewport_size: UVec2) -> Self {
+    pub fn new(viewport_size: UVec2, config: crate::config::Config) -> Self {
         Self {
             viewport_size,
             mouse: Mouse::new(),
@@ -31,7 +31,7 @@ impl App {
             is_fullscreen: false,
             is_inputting_text: false,
 
-            game: Game::new(),
+            game: Game::new(config),
         }
     }
 
@@ -166,7 +166,7 @@ impl WindowHandler for App {
     }
 }
 
-struct Keyboard {
+pub struct Keyboard {
     buffer: Vec<char>,
     modifiers: ModifiersState,
     pressed: Vec<VirtualKeyCode>,
@@ -200,7 +200,7 @@ impl Keyboard {
     }
 }
 
-struct Mouse {
+pub struct Mouse {
     position: Vec2,
     grabbed: bool,
     pressed: Vec<MouseButton>,
