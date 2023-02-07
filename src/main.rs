@@ -13,6 +13,9 @@ use app::App;
 mod config;
 use config::Config;
 
+mod game;
+mod spritesheet;
+
 fn main() {
     let config = Config::new("config.ini");
     let window_size = UVec2::new(config.window_width, config.window_height);

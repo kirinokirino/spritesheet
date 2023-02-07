@@ -8,8 +8,7 @@ use speedy2d::{
     Graphics2D,
 };
 
-mod game;
-use game::Game;
+use crate::game::Game;
 
 pub struct App {
     viewport_size: UVec2,
