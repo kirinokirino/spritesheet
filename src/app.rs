@@ -14,6 +14,7 @@ pub struct App {
     viewport_size: UVec2,
 
     current_frame: u64,
+    sleep_ms_per_frame: u64,
     mouse: Mouse,
     keyboard: Keyboard,
     is_fullscreen: bool,
@@ -28,6 +29,7 @@ impl App {
             viewport_size,
 
             current_frame: 0,
+            sleep_ms_per_frame: config.sleep_ms_per_frame,
             mouse: Mouse::new(),
             keyboard: Keyboard::new(),
             is_fullscreen: false,
@@ -37,17 +39,18 @@ impl App {
         }
     }
 
-    pub fn game_loop(&mut self, _helper: &mut WindowHelper<()>, graphics: &mut Graphics2D) {
+    pub fn game_loop(&mut self, helper: &mut WindowHelper<()>, graphics: &mut Graphics2D) {
         if self.current_frame == 0 {
             self.setup(graphics);
         }
-
         self.input();
 
         self.update();
 
         self.draw(graphics);
         self.current_frame += 1;
+        std::thread::sleep(std::time::Duration::from_millis(self.sleep_ms_per_frame));
+        helper.request_redraw();
     }
 
     pub fn setup(&mut self, graphics: &mut Graphics2D) {
@@ -66,7 +69,6 @@ impl App {
     pub fn draw(&self, graphics: &mut Graphics2D) {
         graphics.clear_screen(Color::from_gray(0.3));
         self.game.draw(graphics);
-        std::thread::sleep(std::time::Duration::from_millis(5));
     }
 }
 

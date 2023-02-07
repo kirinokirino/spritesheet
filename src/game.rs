@@ -46,7 +46,7 @@ impl Game {
 
     pub fn draw(&self, graphics: &mut Graphics2D) {
         let spritesheet = self.spritesheets.first().unwrap();
-        let pattern_size = 16;
+        let pattern_size = 32;
 
         for x in 0..=self.viewport_size.x / pattern_size {
             for y in 0..=self.viewport_size.y / pattern_size {
